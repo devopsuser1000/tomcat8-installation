@@ -1,0 +1,31 @@
+---
+- hosts: webservers
+  become: yes
+  tasks:
+  - name: Update and upgrade apt packages
+    apt:
+      upgrade: yes
+      update_cache: yes
+      cache_valid_time: 86400 #One day
+  - name: "Install Java"
+    apt:
+      name: openjdk-8-jdk
+      state: present
+  - name: "install tomcat8"
+    apt:
+      name: tomcat8
+      state: present
+  - name: "install tomcat8-docs"
+    apt:
+      name: tomcat8-docs
+      state: present
+  - name: "install tomcat8-examples"
+    apt:
+      name: tomcat8-examples
+      state: present
+  - name: "install tomcat8-admin"
+    apt:
+      name: tomcat8-admin
+      state: present
+  - name: "start tomcat services"
+    shell: "/usr/local/apache-tomcat-8.0.1/bin/startup.sh"
